@@ -383,7 +383,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 24px;
 }
 #hero .icon-box {
-  padding: 10px 5px;
+  padding: 30px 20px;
+  background-color: :#ffffff10;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: ease-in-out 0.3s;
   border: 1px solid rgba(255, 255, 255, 0.3);
   height: 100%;
@@ -621,6 +624,7 @@ section {
 .cta h3 {
   color: #fff;
   font-size: 28px;
+  padding: 25px 10px;
   font-weight: 700;
 }
 .cta p {
