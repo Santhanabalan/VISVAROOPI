@@ -12,8 +12,8 @@ from django.contrib.auth.models import Group
 
 # Create your views here.
 from .models import *
-from .forms import OrderForm, CreateUserForm, CustomerForm
-from .filters import OrderFilter
+from .forms import TaskForm, CreateUserForm, EmployeeForm
+from .filters import TaskFilter
 from .decorators import unauthenticated_user, allowed_users, admin_only
 
 @unauthenticated_user
@@ -60,44 +60,44 @@ def logoutUser(request):
 @login_required(login_url='login')
 @admin_only
 def home(request):
-	orders = Order.objects.all()
-	customers = Customer.objects.all()
+	tasks = Task.objects.all()
+	employees = Employee.objects.all()
 
-	total_customers = customers.count()
+	total_employees = employees.count()
 
-	total_orders = orders.count()
-	delivered = orders.filter(status='Delivered').count()
-	pending = orders.filter(status='Pending').count()
+	total_tasks = tasks.count()
+	delivered = tasks.filter(status='Delivered').count()
+	pending = tasks.filter(status='Pending').count()
 
-	context = {'orders':orders, 'customers':customers,
-	'total_orders':total_orders,'delivered':delivered,
+	context = {'tasks':tasks, 'employees':employees,
+	'total_tasks':total_tasks,'delivered':delivered,
 	'pending':pending }
 
 	return render(request, 'accounts/dashboard.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['customer'])
+@allowed_users(allowed_roles=['employee'])
 def userPage(request):
-	orders = request.user.customer.order_set.all()
+	tasks = request.user.employee.task_set.all()
 
-	total_orders = orders.count()
-	delivered = orders.filter(status='Delivered').count()
-	pending = orders.filter(status='Pending').count()
+	total_tasks = tasks.count()
+	delivered = tasks.filter(status='Delivered').count()
+	pending = tasks.filter(status='Pending').count()
 
-	print('ORDERS:', orders)
+	print('TaskS:', tasks)
 
-	context = {'orders':orders, 'total_orders':total_orders,
+	context = {'tasks':tasks, 'total_tasks':total_tasks,
 	'delivered':delivered,'pending':pending}
 	return render(request, 'accounts/user.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['customer'])
+@allowed_users(allowed_roles=['employee'])
 def accountSettings(request):
-	customer = request.user.customer
-	form = CustomerForm(instance=customer)
+	employee = request.user.employee
+	form = EmployeeForm(instance=employee)
 
 	if request.method == 'POST':
-		form = CustomerForm(request.POST, request.FILES,instance=customer)
+		form = EmployeeForm(request.POST, request.FILES,instance=employee)
 		if form.is_valid():
 			form.save()
 
@@ -110,67 +110,67 @@ def accountSettings(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def products(request):
-	products = Product.objects.all()
+def givenTasks(request):
+	givenTasks = GivenTask.objects.all()
 
-	return render(request, 'accounts/products.html', {'products':products})
+	return render(request, 'accounts/givenTasks.html', {'givenTasks':givenTasks})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def customer(request, pk_test):
-	customer = Customer.objects.get(id=pk_test)
+def employee(request, pk_test):
+	employee = Employee.objects.get(id=pk_test)
 
-	orders = customer.order_set.all()
-	order_count = orders.count()
+	tasks = employee.task_set.all()
+	task_count = tasks.count()
 
-	myFilter = OrderFilter(request.GET, queryset=orders)
-	orders = myFilter.qs 
+	myFilter = TaskFilter(request.GET, queryset=tasks)
+	tasks = myFilter.qs 
 
-	context = {'customer':customer, 'orders':orders, 'order_count':order_count,
+	context = {'employee':employee, 'tasks':tasks, 'task_count':task_count,
 	'myFilter':myFilter}
-	return render(request, 'accounts/customer.html',context)
+	return render(request, 'accounts/employee.html',context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def createOrder(request, pk):
-	OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=10 )
-	customer = Customer.objects.get(id=pk)
-	formset = OrderFormSet(queryset=Order.objects.none(),instance=customer)
-	#form = OrderForm(initial={'customer':customer})
+def createTask(request, pk):
+	TaskFormSet = inlineformset_factory(Employee, Task, fields=('givenTask', 'status'), extra=10 )
+	employee = Employee.objects.get(id=pk)
+	formset = TaskFormSet(queryset=Task.objects.none(),instance=employee)
+	#form = TaskForm(initial={'employee':employee})
 	if request.method == 'POST':
 		#print('Printing POST:', request.POST)
-		form = OrderForm(request.POST)
-		formset = OrderFormSet(request.POST, instance=customer)
+		form = TaskForm(request.POST)
+		formset = TaskFormSet(request.POST, instance=employee)
 		if formset.is_valid():
 			formset.save()
 			return redirect('/')
 
 	context = {'form':formset}
-	return render(request, 'accounts/order_form.html', context)
+	return render(request, 'accounts/task_form.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def updateOrder(request, pk):
-	order = Order.objects.get(id=pk)
-	form = OrderForm(instance=order)
-	print('ORDER:', order)
+def updateTask(request, pk):
+	task = Task.objects.get(id=pk)
+	form = TaskForm(instance=task)
+	print('Task:', task)
 	if request.method == 'POST':
 
-		form = OrderForm(request.POST, instance=order)
+		form = TaskForm(request.POST, instance=task)
 		if form.is_valid():
 			form.save()
 			return redirect('/')
 
 	context = {'form':form}
-	return render(request, 'accounts/order_form.html', context)
+	return render(request, 'accounts/task_form.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def deleteOrder(request, pk):
-	order = Order.objects.get(id=pk)
+def deleteTask(request, pk):
+	task = Task.objects.get(id=pk)
 	if request.method == "POST":
-		order.delete()
+		task.delete()
 		return redirect('/')
 
-	context = {'item':order}
+	context = {'item':task}
 	return render(request, 'accounts/delete.html', context)

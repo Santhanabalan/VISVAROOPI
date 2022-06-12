@@ -8,22 +8,22 @@
 
 <div class="row">
 	<div class="col-md-5">
-		<h5>CUSTOMERS:</h5>
+		<h5>Employees:</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary  btn-sm btn-block" href="">Create Customer</a>
+			<a class="btn btn-primary  btn-sm btn-block" href="">Create Employee</a>
 			<table class="table table-sm">
 				<tr>
 					<th></th>
-					<th>Customer</th>
+					<th>Employee</th>
 					<th>Phone</th>
 				</tr>
 
-				{% for customer in customers %}
+				{% for employee in employees %}
 					<tr>
-						<td><a class="btn btn-sm btn-info" href="{% url 'customer' customer.id %}">View</a></td>
-						<td>{{customer.name}}</td>
-						<td>{{customer.phone}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'employee' employee.id %}">View</a></td>
+						<td>{{employee.name}}</td>
+						<td>{{employee.phone}}</td>
 					</tr>
 				{% endfor %}
 
@@ -32,27 +32,27 @@
 	</div>
 
 	<div class="col-md-7">
-		<h5>LAST 5 ORDERS</h5>
+		<h5>LAST 5 TASKSS</h5>
 		<hr>
 		<div class="card card-body">
 			
 			<table class="table table-sm">
 				<tr>
-					<th>Product</th>
-					<th>Date Orderd</th>
+					<th>GivenTask</th>
+					<th>Date Task Given</th>
 					<th>Status</th>
 					<th>Update</th>
 					<th>Remove</th>
 				</tr>
 
-				{% for order in orders %}
+				{% for task in tasks %}
 					<tr>
-						<td>{{order.product}}</td>
-						<td>{{order.date_created}}</td>
-						<td>{{order.status}}</td>
-						<td><a class="btn btn-sm btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+						<td>{{task.givenTask}}</td>
+						<td>{{task.date_created}}</td>
+						<td>{{task.status}}</td>
+						<td><a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a></td>
 
-						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_order' order.id %}">Delete</a></td>
+						<td><a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}">Delete</a></td>
 
 					</tr>
 				{% endfor %}

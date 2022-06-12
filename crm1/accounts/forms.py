@@ -5,15 +5,15 @@ from django import forms
 
 from .models import *
 
-class CustomerForm(ModelForm):
+class EmployeeForm(ModelForm):
 	class Meta:
-		model = Customer
+		model = Employee
 		fields = '__all__'
 		exclude = ['user']
 
-class OrderForm(ModelForm):
+class TaskForm(ModelForm):
 	class Meta:
-		model = Order
+		model = Task
 		fields = '__all__'
 
 

@@ -7,19 +7,19 @@
 		<div class="card card-body">
 			<table class="table table-sm">
 				<tr>
-					<th>Product</th>
+					<th>GivenTask</th>
 					<th>Note</th>
-					<th>Date Orderd</th>
+					<th>Date Taskd</th>
 					<th>Status</th>
 				</tr>
 
-				{% for order in orders %}
+				{% for task in tasks %}
 
 				<tr>
-					<td>{{order.product}}</td>
-					<td>{{order.note}}</td>
-					<td>{{order.date_created}}</td>
-					<td>{{order.status}}</td>
+					<td>{{task.givenTask}}</td>
+					<td>{{task.note}}</td>
+					<td>{{task.date_created}}</td>
+					<td>{{task.status}}</td>
 				</tr>
 				{% endfor %}
 
