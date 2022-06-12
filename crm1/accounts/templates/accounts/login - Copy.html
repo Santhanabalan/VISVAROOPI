@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Portfolio Details - Gp Bootstrap Template</title>
+  <title>Login/Register</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,12 +29,99 @@
   <!-- Template Main CSS File -->
   <link href=" {% static 'assets/css/style.css' %} " rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Gp - v4.7.0
-  * Template URL: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+  <!-- LOGIN PAGE  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+  <style>
+	body,
+	html {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		/* background: #7abecc !important; */
+		background-image: url("/static/assets/img/loginbg.jpg");
+		background-position: center;
+	}
+	.anchor {
+		color: #ffcd6b;
+	}
+	.user_card {
+		width: 350px;
+		margin-top: 9%;
+		margin-bottom: auto;
+		background: #29262610;
+		backdrop-filter: blur(50px);
+		  -webkit-backdrop-filter: blur(50px);	
+		position: relative;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+		padding: 10px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		border-radius: 5px;
+
+	}
+
+	.form_container {
+		margin-top: 20px;
+	}
+
+	#form-title{
+		color: #fff;
+		
+	}
+
+	.login_btn {
+		width: 100%;
+		background: #ffcd6b !important;
+		color: black !important;
+	}
+	.login_btn:focus {
+		box-shadow: none !important;
+		outline: 0px !important;
+	}
+	.login_container {
+		padding: 0 2rem;
+	}
+	.input-group-text {
+		background: #ffcd6b !important;
+		color: white !important;
+		border: 0 !important;
+		border-radius: 0.25rem 0 0 0.25rem !important;
+	}
+	.input_user,
+	.input_pass:focus {
+		box-shadow: none !important;
+		outline: 0px !important;
+	}
+
+	#messages{
+		background-color: grey;
+		color: #fff;
+		padding: 10px;
+		margin-top: 10px;
+	}
+	.links{
+		color: white;
+	}
+	.footer {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		margin: 4%;
+		position: fixed;
+		background: #29262610;
+		backdrop-filter: blur(25px);
+		  -webkit-backdrop-filter: blur(12px);	
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		color: white;
+		text-align: center;
+		}
+</style>
+ <!-- LOGIN PAGE end-->
 </head>
 
 <body>
@@ -49,11 +136,11 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto " href=" {% static '#hero' %} ">Home</a></li>
-          <li><a class="nav-link scrollto" href=" {% static '#about' %} ">About</a></li>
-          <li><a class="nav-link scrollto" href=" {% static '#services' %} ">Services</a></li>
-          <li><a class="nav-link scrollto active" href=" {% static '#portfolio' %} ">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href=" {% static '#team' %} ">Team</a></li>
+          <li><a class="nav-link scrollto " href=" {% static 'home.html#hero' %} ">Home</a></li>
+          <li><a class="nav-link scrollto" href=" {% static 'home.html#about' %} ">About</a></li>
+          <li><a class="nav-link scrollto" href=" {% static 'home.html#services' %} ">Services</a></li>
+          <li><a class="nav-link scrollto " href=" {% static 'home.html#portfolio' %} ">Portfolio</a></li>
+          <li><a class="nav-link scrollto" href=" {% static 'home.html#team' %} ">Team</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
               <li><a href="#">Drop Down 1</a></li>
@@ -76,77 +163,79 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href=" {% static '#about' %} " class="get-started-btn scrollto">Get Started</a>
-
     </div>
   </header><!-- End Header -->
 
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
+    <section class="breadcrumbs">
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Portfolio Details</h2>
+          <h2>Inner Page</h2>
           <ol>
             <li><a href=" {% static 'index.html' %} ">Home</a></li>
-            <li>Portfolio Details</li>
+            <li>Inner Page</li>
           </ol>
         </div>
 
       </div>
     </section><!-- End Breadcrumbs -->
 
-    <!-- ======= Portfolio Details Section ======= -->
-    <section id="portfolio-details" class="portfolio-details">
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-8">
-            <div class="portfolio-details-slider swiper">
-              <div class="swiper-wrapper align-items-center">
-
-                <div class="swiper-slide">
-                  <img src=" {% static 'assets/img/portfolio/portfolio-1.jpg' %} " alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src=" {% static 'assets/img/portfolio/portfolio-2.jpg' %} " alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src=" {% static 'assets/img/portfolio/portfolio-3.jpg' %} " alt="">
-                </div>
-
-              </div>
-              <div class="swiper-pagination"></div>
-            </div>
-          </div>
-
-          <div class="col-lg-4">
-            <div class="portfolio-info">
-              <h3>Project information</h3>
-              <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
-              </ul>
-            </div>
-            <div class="portfolio-description">
-              <h2>This is an example of portfolio detail</h2>
-              <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Details Section -->
+    <section class="inner-page">
+		<div class="container h-100">
+			<div class="d-flex justify-content-center h-100">
+				<div class="user_card">
+					<div class="d-flex justify-content-center">
+	
+	
+						<h3 id="form-title">LOGIN</h3>
+					</div>
+					<div class="d-flex justify-content-center form_container">
+						<form method="POST" action="">
+							{% csrf_token %}
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+	
+								<input type="text" name="username" placeholder="Username..." class="form-control">
+							</div>
+	
+							<div class="input-group mb-2">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+	
+									<input type="password" name="password" placeholder="Password..." class="form-control" >
+							</div>
+	
+								<div class="d-flex justify-content-center mt-3 login_container">
+									 <input class="btn login_btn" type="submit" value="Login">
+								   </div>
+						</form>
+	
+					</div>
+	
+					{% for message in messages %}
+						<p id="messages">{{message}}</p>
+					{% endfor %}			
+			
+					<div class="mt-4">
+						<div class="d-flex justify-content-center links">
+							Don't have an account? <a class="anchor" href="{% url 'register' %}" class="ml-2">Sign Up</a>
+						</div>
+						<div class="d-flex justify-content-center links">
+							Forgot password? <a class="anchor" href="{% url 'reset_password' %}" class="ml-2">Reset password</a>
+						</div>
+				
+					</div>
+				</div>
+			</div>
+			
+		</div>
+    </section>
 
   </main><!-- End #main -->
 
@@ -215,10 +304,6 @@
         &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/gp-free-multipurpose-html-bootstrap-template/ -->
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
