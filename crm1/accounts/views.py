@@ -112,12 +112,14 @@ def accountSettings(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def givenTasks(request):
+	tasks = Task.objects.all()
+	total_tasks = tasks.count()
 	givenTasks = GivenTask.objects.all()
-	current_price= GivenTask.objects.all().aggregate(Sum('price'))
+	current_price= Task.objects.all().aggregate(Sum('salary'))
 	total_price= {'price':20000000}
-	rem= total_price['price']-current_price['price__sum']
+	rem=total_price['price']-current_price['salary__sum']
 	remaining= {'remaining':rem}
-	context = {'givenTasks':givenTasks ,'current_price':current_price,'total_price':total_price,'remaining':remaining}
+	context = {'tasks':tasks,'total_tasks':total_tasks,'givenTasks':givenTasks ,'current_price':current_price,'total_price':total_price,'remaining':remaining}
 	return render(request, 'accounts/givenTasks.html', context)
 
 @login_required(login_url='login')
@@ -138,7 +140,7 @@ def employee(request, pk_test):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
 def createTask(request, pk):
-	TaskFormSet = inlineformset_factory(Employee, Task, fields=('givenTask', 'status'), extra=10 )
+	TaskFormSet = inlineformset_factory(Employee, Task, fields=('givenTask', 'status','salary','note'), extra=5 )
 	employee = Employee.objects.get(id=pk)
 	formset = TaskFormSet(queryset=Task.objects.none(),instance=employee)
 	#form = TaskForm(initial={'employee':employee})

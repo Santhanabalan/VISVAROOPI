@@ -3,11 +3,39 @@
 {% block content %}
 
 		<br>
-
+		<div class="col">
+			<div class="card card-body">
+				<h5>List of Tasks</h5>
+				<hr>
+				<table class="table table-sm">
+					<tr>
+						<th>GivenTask</th>
+						<th>Date Task Given</th>
+						<th>Status</th>
+						<th>Update</th>
+						<th>Remove</th>
+					</tr>
+	
+					{% for task in tasks %}
+						<tr>
+							<td>{{task.givenTask}}</td>
+							<td>{{task.date_created}}</td>
+							<td>{{task.status}}</td>
+							<td><a class="btn btn-sm btn-info" href="{% url 'update_task' task.id %}">Update</a></td>
+	
+							<td><a class="btn btn-sm btn-danger" href="{% url 'delete_task' task.id %}">Delete</a></td>
+	
+						</tr>
+					{% endfor %}
+	
+			
+				</table>
+			</div>
+		</div>
 		<div class="row">
 			<div class="col-md">
 				<div class="card card-body">
-					<h5>GivenTasks</h5>
+					<h5>Salary</h5>
 				</div>
 				<div class="card card-body">
 					<table class="table">
@@ -39,7 +67,7 @@
 						</tr>
 						<tr>
 							<td>{{total_price.price}}</td>
-							<td>{{current_price.price__sum}}</td>
+							<td>{{current_price.salary__sum}}</td>
 							<td>{{remaining.remaining}}</td>
 						</tr>
 					</table>
