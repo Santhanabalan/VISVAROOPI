@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
 # Create your views here.
+from django.db.models import Sum
 from .models import *
 from .forms import TaskForm, CreateUserForm, EmployeeForm
 from .filters import TaskFilter
@@ -66,11 +67,11 @@ def home(request):
 	total_employees = employees.count()
 
 	total_tasks = tasks.count()
-	delivered = tasks.filter(status='Delivered').count()
+	completed = tasks.filter(status='Completed').count()
 	pending = tasks.filter(status='Pending').count()
 
 	context = {'tasks':tasks, 'employees':employees,
-	'total_tasks':total_tasks,'delivered':delivered,
+	'total_tasks':total_tasks,'completed':completed,
 	'pending':pending }
 
 	return render(request, 'accounts/dashboard.html', context)
@@ -81,13 +82,13 @@ def userPage(request):
 	tasks = request.user.employee.task_set.all()
 
 	total_tasks = tasks.count()
-	delivered = tasks.filter(status='Delivered').count()
+	completed = tasks.filter(status='Completed').count()
 	pending = tasks.filter(status='Pending').count()
 
 	print('TaskS:', tasks)
 
 	context = {'tasks':tasks, 'total_tasks':total_tasks,
-	'delivered':delivered,'pending':pending}
+	'completed':completed,'pending':pending}
 	return render(request, 'accounts/user.html', context)
 
 @login_required(login_url='login')
@@ -112,8 +113,12 @@ def accountSettings(request):
 @allowed_users(allowed_roles=['admin'])
 def givenTasks(request):
 	givenTasks = GivenTask.objects.all()
-
-	return render(request, 'accounts/givenTasks.html', {'givenTasks':givenTasks})
+	current_price= GivenTask.objects.all().aggregate(Sum('price'))
+	total_price= {'price':20000000}
+	rem= total_price['price']-current_price['price__sum']
+	remaining= {'remaining':rem}
+	context = {'givenTasks':givenTasks ,'current_price':current_price,'total_price':total_price,'remaining':remaining}
+	return render(request, 'accounts/givenTasks.html', context)
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
