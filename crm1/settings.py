@@ -179,4 +179,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '*********'
 EMAIL_HOST_PASSWORD = '*********'
 
-django_heroku.settings(locals(),staticfiles=False)
+django_heroku.settings(locals())
