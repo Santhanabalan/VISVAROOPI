@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+import dj_database_url
+import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -23,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'cz=&%f*9(d*zo$_55p=(p)(eki#p$pb^0159-)8k^6$9c3l&_b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vfc.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
  
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,14 +89,14 @@ STEPS FOR DJANGO POSTGRESQL DATABASE + AWS RDS
 3 - Connect database to Django App & run migrations
 4 - Create database on AWS
 5 - Connect to live AWS Database with PG admin & Django
-
+        'ENGINE': 'django.db.backends.postgresql',
 '''
 
 '''
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database name',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ciba',
         'USER':'database user',
         'PASSWORD':'database password',
         'HOST':'database endpoint',
@@ -148,14 +150,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/images/'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
+# STATICFILES_FINDERS = (
+
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#     'django.contrib.staticfiles.finders.DefaultStorageFinder',
+# )
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
@@ -168,3 +178,5 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '*********'
 EMAIL_HOST_PASSWORD = '*********'
+
+django_heroku.settings(locals())

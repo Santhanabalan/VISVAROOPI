@@ -88,31 +88,31 @@
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-store-line"></i>
-            <h3><a href=" {% static '' %} ">Movies</a></h3>
+            <h3><a href="#portfolio">Movies</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line"></i>
-            <h3><a href=" {% static '' %} ">Trailers</a></h3>
+            <h3><a href="#cta">Trailers</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-calendar-todo-line"></i>
-            <h3><a href=" {% static '' %} ">Music</a></h3>
+            <h3><a href="">Music</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-paint-brush-line"></i>
-            <h3><a href=" {% static '' %} ">Directors</a></h3>
+            <h3><a href="#contact">Directors</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-database-2-line"></i>
-            <h3><a href=" {% static '' %} ">Artists</a></h3>
+            <h3><a href="#team">Artists</a></h3>
           </div>
         </div>
       </div>
@@ -554,7 +554,8 @@
         </div>
 
         <div>
-          <iframe src="https://www.google.com/maps/d/embed?mid=1-8JS986P2gNlyKx6H8RsEtEX85A&ehbc=2E312F" frameborder="0" allowfullscreen></iframe>
+          <!-- <iframe src="https://www.google.com/maps/d/embed?mid=1-8JS986P2gNlyKx6H8RsEtEX85A&ehbc=2E312F" frameborder="0" allowfullscreen></iframe> -->
+          <iframe src="https://www.google.com/maps/d/embed?mid=1-8JS986P2gNlyKx6H8RsEtEX85A&ehbc=2E312F" width="100%" height="480"></iframe>
         </div>
 
         <div class="row mt-5">
@@ -584,8 +585,9 @@
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <h2>Appointment Booking:</h2>
+            <form action="" method="post" role="form" class="php-email-form">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -596,6 +598,9 @@
               </div>
               <div class="form-group mt-3">
                 <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <input type="datetime-local" class="form-control" name="datetime" id="datetime" placeholder="Datetime" required>
               </div>
               <div class="form-group mt-3">
                 <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
@@ -659,6 +664,7 @@
             <h4>Our Newsletter</h4>
             <p>Subscribe to our newsletter for free!</p>
             <form action="" method="post">
+              {% csrf_token %}
               <input type="email" name="email" placeholder="Email address"><input type="submit" value="Subscribe">
             </form>
           </div>
@@ -687,7 +693,7 @@
   <script src=" {% static 'assets/vendor/glightbox/js/glightbox.min.js' %} "></script>
   <script src=" {% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %} "></script>
   <script src=" {% static 'assets/vendor/swiper/swiper-bundle.min.js' %} "></script>
-  <script src=" {% static 'assets/vendor/php-email-form/validate.js' %} "></script>
+  <!-- <script src=" {% static 'assets/vendor/php-email-form/validate.js' %} "></script> -->
 
   <!-- Template Main JS File -->
   <script src=" {% static 'assets/js/main.js' %} "></script>

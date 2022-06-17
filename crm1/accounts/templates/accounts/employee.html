@@ -7,9 +7,8 @@
 <div class="row">
 	<div class="col-md">
 		<div class="card card-body">
-			<h5>Employee:</h5>
+			<h5>Employee: {{employee.name}}</h5>
 			<hr>
-			<a class="btn btn-outline-info  btn-sm btn-block" href="">Update Employee</a>
 			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'create_task' employee.id %}">Give Task</a>
 
 		</div>

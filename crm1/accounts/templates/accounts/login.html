@@ -260,7 +260,9 @@
           <div class="col-lg-4 col-md-6 footer-newsletter">
             <h4>Our Newsletter</h4>
             <p>Subscribe to our newsletter for free!</p>
+
             <form action="" method="post">
+              {% csrf_token %}
               <input type="email" name="email" placeholder="Email address"><input type="submit" value="Subscribe">
             </form>
           </div>
