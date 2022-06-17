@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'cz=&%f*9(d*zo$_55p=(p)(eki#p$pb^0159-)8k^6$9c3l&_b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['vfc.herokuapp.com','127.0.0.1','localhost']
 
@@ -179,4 +179,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '*********'
 EMAIL_HOST_PASSWORD = '*********'
 
-django_heroku.settings(locals(),staticfiles=False)
+django_heroku.settings(locals())
